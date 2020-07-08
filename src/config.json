@@ -5,7 +5,7 @@
   },
   "hidden": {
     "type": "text",
-    "label": "Picaboo!",
+    "label": "Peekaboo!",
     "showIf": "checkbox",
     "placeholder": "I'm hidden"
   },
