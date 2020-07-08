@@ -20,6 +20,7 @@ type InputFactoryProps = {
 
 const InputFactory = ({ name, config, value, onChange }: InputFactoryProps) => {
   const { type, label, options, ...props } = config
+
   switch (type) {
     case 'text':
     case 'number':
@@ -76,16 +77,22 @@ const Form = ({ config, initialValues }: FormProps) => {
 
   return (
     <form>
-      {Object.keys(config).map((key) => (
-        <div style={{ margin: '1rem' }} key={key}>
-          <InputFactory
-            name={key}
-            config={config[key]}
-            value={formik.values[key]}
-            onChange={formik.handleChange}
-          />
-        </div>
-      ))}
+      {Object.keys(config).map((key) => {
+        const { showIf, ...keyConfig } = config[key]
+        const showInput =
+          showIf && config[showIf].type === 'checkbox' && !formik.values[showIf]
+
+        return showInput ? undefined : (
+          <div style={{ margin: '1rem' }} key={key}>
+            <InputFactory
+              name={key}
+              config={keyConfig}
+              value={formik.values[key]}
+              onChange={formik.handleChange}
+            />
+          </div>
+        )
+      })}
     </form>
   )
 }
