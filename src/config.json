@@ -3,6 +3,12 @@
     "type": "checkbox",
     "label": "Simple checkbox"
   },
+  "hidden": {
+    "type": "text",
+    "label": "Picaboo!",
+    "showIf": "checkbox",
+    "placeholder": "I'm hidden"
+  },
   "number": {
     "type": "number",
     "label": "Simple number",
