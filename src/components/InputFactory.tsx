@@ -1,0 +1,62 @@
+import React from 'react'
+import Checkbox from './Checkbox'
+import Select from './Select'
+import TextField from './TextField'
+
+type InputConfig = {
+  type: string
+  label: string
+  options?: string[]
+  [key: string]: any
+}
+
+type InputFactoryProps = {
+  name: string
+  config: InputConfig
+  value: any
+  onChange(event: any): void
+}
+
+const InputFactory = ({ name, config, value, onChange }: InputFactoryProps) => {
+  const { type, label, options, ...props } = config
+
+  switch (type) {
+    case 'text':
+    case 'number':
+      return (
+        <TextField
+          type={type}
+          name={name}
+          label={label}
+          value={value}
+          onChange={onChange}
+          {...props}
+        />
+      )
+    case 'checkbox':
+      return (
+        <Checkbox
+          name={name}
+          label={label}
+          checked={value}
+          onChange={onChange}
+          {...props}
+        />
+      )
+    case 'select':
+      return (
+        <Select
+          name={name}
+          label={label}
+          options={options ? options : []}
+          value={value}
+          onChange={onChange}
+          {...props}
+        />
+      )
+    default:
+      return null
+  }
+}
+
+export default InputFactory
