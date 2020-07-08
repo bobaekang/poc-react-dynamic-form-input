@@ -1,35 +1,6 @@
 import React from 'react'
 import Form from './components/Form'
-
-const config = {
-  checkbox: {
-    type: 'checkbox',
-    label: 'Simple checkbox',
-  },
-  number: {
-    type: 'number',
-    label: 'Simple number',
-    props: {
-      min: 0,
-      max: 10,
-    },
-  },
-  text: {
-    type: 'text',
-    label: 'Simple text',
-    props: {
-      pattern: '^[a-zA-Z]*$',
-    },
-  },
-  select: {
-    type: 'select',
-    label: 'Simple select',
-    options: ['foo', 'bar'],
-    props: {
-      placeholder: 'Select one',
-    },
-  },
-}
+import config from './config.json'
 
 const initialValues = {
   checkbox: false,
