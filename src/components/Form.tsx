@@ -28,10 +28,10 @@ const Form = ({ config, initialValues }: FormProps) => {
     <form>
       {Object.keys(config).map((key) => {
         const { showIf, ...keyConfig } = config[key]
-        const showInput =
+        const hideInput =
           showIf && config[showIf].type === 'checkbox' && !formik.values[showIf]
 
-        return showInput ? undefined : (
+        return hideInput ? undefined : (
           <div style={{ margin: '1rem' }} key={key}>
             <InputFactory
               name={key}
