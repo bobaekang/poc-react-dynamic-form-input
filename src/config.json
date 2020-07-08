@@ -6,24 +6,18 @@
   "number": {
     "type": "number",
     "label": "Simple number",
-    "props": {
-      "min": 0,
-      "max": 10
-    }
+    "min": 0,
+    "max": 10
   },
   "text": {
     "type": "text",
     "label": "Simple text",
-    "props": {
-      "pattern": "^[a-zA-Z]*$"
-    }
+    "pattern": "^[a-zA-Z]*$"
   },
   "select": {
     "type": "select",
     "label": "Simple select",
     "options": ["foo", "bar"],
-    "props": {
-      "placeholder": "Select one"
-    }
+    "placeholder": "Select one"
   }
 }

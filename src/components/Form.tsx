@@ -8,9 +8,7 @@ type InputConfig = {
   type: string
   label: string
   options?: string[]
-  props?: {
-    [key: string]: any
-  }
+  [key: string]: any
 }
 
 type InputFactoryProps = {
@@ -21,7 +19,7 @@ type InputFactoryProps = {
 }
 
 const InputFactory = ({ name, config, value, onChange }: InputFactoryProps) => {
-  const { type, label, options, props } = config
+  const { type, label, options, ...props } = config
   switch (type) {
     case 'text':
     case 'number':
