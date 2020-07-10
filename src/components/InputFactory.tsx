@@ -2,6 +2,7 @@ import React from 'react'
 import Checkbox from './Checkbox'
 import Select from './Select'
 import TextField from './TextField'
+import Radio from './Radio'
 
 type InputConfig = {
   type: string
@@ -46,6 +47,17 @@ const InputFactory = ({ name, config, value, onChange }: InputFactoryProps) => {
     case 'select':
       return (
         <Select
+          name={name}
+          label={label}
+          options={options ? options : []}
+          value={value}
+          onChange={onChange}
+          {...props}
+        />
+      )
+    case 'radio':
+      return (
+        <Radio
           name={name}
           label={label}
           options={options ? options : []}
