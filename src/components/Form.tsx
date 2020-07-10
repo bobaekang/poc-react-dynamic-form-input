@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useFormik } from 'formik'
 import InputFactory from './InputFactory'
 
@@ -14,6 +14,7 @@ export type FormProps = {
   config: {
     [key: string]: InputConfig
   }
+  onChange(values: any): void
 }
 
 const getInitialValues = (config: {
@@ -27,11 +28,16 @@ const getInitialValues = (config: {
     {}
   )
 
-const Form = ({ config }: FormProps) => {
+const Form = ({ config, onChange }: FormProps) => {
   const formik = useFormik({
     initialValues: { ...getInitialValues(config) },
     onSubmit() {},
   })
+
+  useEffect(() => {
+    onChange({ ...formik.values })
+  }, [formik.values, onChange])
+
   return (
     <form>
       {Object.keys(config).map((key) => {

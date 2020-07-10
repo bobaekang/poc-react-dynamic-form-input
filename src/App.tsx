@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Form from './components/Form'
 import config from './config.json'
 
 function App() {
+  const [values, setValues] = useState()
+
   return (
     <div
       style={{
@@ -18,7 +20,7 @@ function App() {
 
       <div style={{ margin: '0 1rem' }}>
         <h1>Generated form</h1>
-        <Form config={config} />
+        <Form config={config} onChange={setValues} />
       </div>
     </div>
   )
