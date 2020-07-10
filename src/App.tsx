@@ -2,14 +2,6 @@ import React from 'react'
 import Form from './components/Form'
 import config from './config.json'
 
-const initialValues = {
-  checkbox: false,
-  number: 0,
-  text: '',
-  select: '',
-  radio: '',
-}
-
 function App() {
   return (
     <div
@@ -26,7 +18,7 @@ function App() {
 
       <div style={{ margin: '0 1rem' }}>
         <h1>Generated form</h1>
-        <Form config={config} initialValues={initialValues} />
+        <Form config={config} />
       </div>
     </div>
   )

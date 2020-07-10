@@ -6,6 +6,7 @@ type InputConfig = {
   type: string
   label: string
   options?: string[]
+  defaultValue?: any
   [key: string]: any
 }
 
@@ -13,21 +14,28 @@ export type FormProps = {
   config: {
     [key: string]: InputConfig
   }
-  initialValues: {
-    [key: string]: any
-  }
 }
 
-const Form = ({ config, initialValues }: FormProps) => {
+const getInitialValues = (config: {
+  [key: string]: InputConfig
+}): { [key: string]: any } =>
+  Object.keys(config).reduce(
+    (acc, key) => ({
+      ...acc,
+      [key]: config[key].type !== 'checkbox' && config[key].defaultValue,
+    }),
+    {}
+  )
+
+const Form = ({ config }: FormProps) => {
   const formik = useFormik({
-    initialValues: { ...initialValues },
+    initialValues: { ...getInitialValues(config) },
     onSubmit() {},
   })
-
   return (
     <form>
       {Object.keys(config).map((key) => {
-        const { showIf, ...keyConfig } = config[key]
+        const { defaultValue, showIf, ...keyConfig } = config[key]
         const hideInput =
           showIf && config[showIf].type === 'checkbox' && !formik.values[showIf]
 

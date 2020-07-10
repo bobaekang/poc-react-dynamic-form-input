@@ -12,6 +12,7 @@
   "number": {
     "type": "number",
     "label": "Simple number",
+    "defaultValue": 5,
     "min": 0,
     "max": 10
   },
@@ -29,6 +30,7 @@
   "radio": {
     "type": "radio",
     "label": "Simple radio",
-    "options": ["foo", "bar"]
+    "options": ["foo", "bar"],
+    "defaultValue": "bar"
   }
 }
