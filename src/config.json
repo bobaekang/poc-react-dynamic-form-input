@@ -25,5 +25,10 @@
     "label": "Simple select",
     "options": ["foo", "bar"],
     "placeholder": "Select one"
+  },
+  "radio": {
+    "type": "radio",
+    "label": "Simple radio",
+    "options": ["foo", "bar"]
   }
 }

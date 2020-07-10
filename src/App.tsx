@@ -7,6 +7,7 @@ const initialValues = {
   number: 0,
   text: '',
   select: '',
+  radio: '',
 }
 
 function App() {
