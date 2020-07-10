@@ -39,7 +39,7 @@ const InputFactory = ({ name, config, value, onChange }: InputFactoryProps) => {
         <Checkbox
           name={name}
           label={label}
-          checked={value}
+          checked={!!value}
           onChange={onChange}
           {...props}
         />
