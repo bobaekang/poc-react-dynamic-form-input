@@ -22,6 +22,11 @@ function App() {
         <h1>Generated form</h1>
         <Form config={config} onChange={setValues} />
       </div>
+
+      <div style={{ margin: '0 1rem' }}>
+        <h1>Current values</h1>
+        <pre>{JSON.stringify(values, null, 2)}</pre>
+      </div>
     </div>
   )
 }
