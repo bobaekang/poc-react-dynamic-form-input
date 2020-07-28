@@ -1,36 +1,38 @@
 {
-  "checkbox": {
-    "type": "checkbox",
-    "label": "Simple checkbox"
-  },
-  "hidden": {
-    "type": "text",
-    "label": "Peekaboo!",
-    "showIf": "checkbox",
-    "placeholder": "I'm hidden"
-  },
-  "number": {
-    "type": "number",
-    "label": "Simple number",
-    "defaultValue": 5,
-    "min": 0,
-    "max": 10
-  },
-  "text": {
-    "type": "text",
-    "label": "Simple text",
-    "pattern": "^[a-zA-Z]*$"
-  },
-  "select": {
-    "type": "select",
-    "label": "Simple select",
-    "options": ["foo", "bar"],
-    "placeholder": "Select one"
-  },
-  "radio": {
-    "type": "radio",
-    "label": "Simple radio",
-    "options": ["foo", "bar"],
-    "defaultValue": "bar"
+  "inputs": {
+    "checkbox": {
+      "type": "checkbox",
+      "label": "Simple checkbox"
+    },
+    "hidden": {
+      "type": "text",
+      "label": "Peekaboo!",
+      "showIf": "checkbox",
+      "placeholder": "I'm hidden"
+    },
+    "number": {
+      "type": "number",
+      "label": "Simple number",
+      "defaultValue": 5,
+      "min": 0,
+      "max": 10
+    },
+    "text": {
+      "type": "text",
+      "label": "Simple text",
+      "pattern": "^[a-zA-Z]*$"
+    },
+    "select": {
+      "type": "select",
+      "label": "Simple select",
+      "options": ["foo", "bar"],
+      "placeholder": "Select one"
+    },
+    "radio": {
+      "type": "radio",
+      "label": "Simple radio",
+      "options": ["foo", "bar"],
+      "defaultValue": "bar"
+    }
   }
 }

@@ -12,7 +12,9 @@ type InputConfig = {
 
 export type FormProps = {
   config: {
-    [key: string]: InputConfig
+    inputs: {
+      [key: string]: InputConfig
+    }
   }
   onChange(values: any): void
 }
@@ -28,9 +30,9 @@ const getInitialValues = (config: {
     {}
   )
 
-const Form = ({ config, onChange }: FormProps) => {
+const Form = ({ config: { inputs }, onChange }: FormProps) => {
   const formik = useFormik({
-    initialValues: { ...getInitialValues(config) },
+    initialValues: { ...getInitialValues(inputs) },
     onSubmit() {},
   })
 
@@ -40,10 +42,10 @@ const Form = ({ config, onChange }: FormProps) => {
 
   return (
     <form>
-      {Object.keys(config).map((key) => {
-        const { defaultValue, showIf, ...keyConfig } = config[key]
+      {Object.keys(inputs).map((key) => {
+        const { defaultValue, showIf, ...keyConfig } = inputs[key]
         const hideInput =
-          showIf && config[showIf].type === 'checkbox' && !formik.values[showIf]
+          showIf && inputs[showIf].type === 'checkbox' && !formik.values[showIf]
 
         return hideInput ? undefined : (
           <div style={{ margin: '1rem' }} key={key}>
