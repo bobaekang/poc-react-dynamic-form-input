@@ -21,13 +21,13 @@ export type FormProps = {
   onChange(values: any): void
 }
 
-const getInitialValues = (config: {
+const getInitialValues = (inputs: {
   [key: string]: InputConfig
 }): { [key: string]: any } =>
-  Object.keys(config).reduce(
+  Object.keys(inputs).reduce(
     (acc, key) => ({
       ...acc,
-      [key]: config[key].type !== 'checkbox' && config[key].defaultValue,
+      [key]: inputs[key].type !== 'checkbox' && inputs[key].defaultValue,
     }),
     {}
   )
