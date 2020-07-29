@@ -1,18 +1,21 @@
 {
-  "inputs": {
-    "checkbox": {
+  "inputs": [
+    {
+      "name": "checkbox",
       "type": "checkbox",
       "label": "Simple checkbox",
       "group": "foo"
     },
-    "hidden": {
+    {
+      "name": "hidden",
       "type": "text",
       "label": "Peekaboo!",
       "showIf": "checkbox",
       "placeholder": "I'm hidden",
       "group": "foo"
     },
-    "number": {
+    {
+      "name": "number",
       "type": "number",
       "label": "Simple number",
       "defaultValue": 5,
@@ -20,26 +23,29 @@
       "max": 10,
       "group": "bar"
     },
-    "text": {
+    {
+      "name": "text",
       "type": "text",
       "label": "Simple text",
       "pattern": "^[a-zA-Z]*$",
       "group": "baz"
     },
-    "select": {
+    {
+      "name": "select",
       "type": "select",
       "label": "Simple select",
       "options": ["foo", "bar"],
       "placeholder": "Select one",
       "group": "bar"
     },
-    "radio": {
+    {
+      "name": "radio",
       "type": "radio",
       "label": "Simple radio",
       "options": ["foo", "bar"],
       "defaultValue": "bar",
       "group": "bar"
     }
-  },
+  ],
   "groups": ["foo", "bar", "baz"]
 }

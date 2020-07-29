@@ -3,6 +3,7 @@ import { useFormik } from 'formik'
 import InputFactory from './InputFactory'
 
 type InputConfig = {
+  name: string
   type: string
   label: string
   group: string
@@ -13,21 +14,17 @@ type InputConfig = {
 
 export type FormProps = {
   config: {
-    inputs: {
-      [key: string]: InputConfig
-    }
+    inputs: InputConfig[]
     groups: string[]
   }
   onChange(values: any): void
 }
 
-const getInitialValues = (inputs: {
-  [key: string]: InputConfig
-}): { [key: string]: any } =>
-  Object.keys(inputs).reduce(
-    (acc, key) => ({
+const getInitialValues = (inputs: InputConfig[]): { [key: string]: any } =>
+  inputs.reduce(
+    (acc, { name, type, defaultValue }) => ({
       ...acc,
-      [key]: inputs[key].type !== 'checkbox' && inputs[key].defaultValue,
+      [name]: type !== 'checkbox' && defaultValue,
     }),
     {}
   )
@@ -42,27 +39,31 @@ const Form = ({ config: { inputs, groups }, onChange }: FormProps) => {
     onChange({ ...formik.values })
   }, [formik.values, onChange])
 
+  const inputTypeMap: {
+    [key: string]: string
+  } = inputs.reduce((acc, { name, type }) => ({ ...acc, [name]: type }), {})
+
   return (
     <form>
       {groups.map((g) => (
         <Fragment key={g}>
           {g && <h2 style={{ textTransform: 'capitalize' }}>{g}</h2>}
 
-          {Object.keys(inputs).map((key) => {
-            if (inputs[key].group !== g) return undefined
+          {inputs.map((input) => {
+            if (input.group !== g) return undefined
 
-            const { defaultValue, showIf, group, ...keyConfig } = inputs[key]
+            const { name, defaultValue, showIf, group, ...keyConfig } = input
             const hideInput =
               showIf &&
-              inputs[showIf].type === 'checkbox' &&
+              inputTypeMap[showIf] === 'checkbox' &&
               !formik.values[showIf]
 
             return hideInput ? undefined : (
-              <div style={{ margin: '1rem' }} key={key}>
+              <div style={{ margin: '1rem' }} key={name}>
                 <InputFactory
-                  name={key}
+                  name={name}
                   config={keyConfig}
-                  value={formik.values[key]}
+                  value={formik.values[name]}
                   onChange={formik.handleChange}
                 />
               </div>
