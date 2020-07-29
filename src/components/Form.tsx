@@ -43,7 +43,7 @@ const Form = ({ config: { inputs }, onChange }: FormProps) => {
   return (
     <form>
       {Object.keys(inputs).map((key) => {
-        const { defaultValue, showIf, ...keyConfig } = inputs[key]
+        const { defaultValue, showIf, group, ...keyConfig } = inputs[key]
         const hideInput =
           showIf && inputs[showIf].type === 'checkbox' && !formik.values[showIf]
 
