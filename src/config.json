@@ -40,5 +40,6 @@
       "defaultValue": "bar",
       "group": "bar"
     }
-  }
+  },
+  "groups": ["foo", "bar", "baz"]
 }

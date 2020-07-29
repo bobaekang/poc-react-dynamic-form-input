@@ -15,6 +15,7 @@ export type FormProps = {
     inputs: {
       [key: string]: InputConfig
     }
+    groups: string[]
   }
   onChange(values: any): void
 }
