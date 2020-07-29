@@ -46,7 +46,7 @@ const Form = ({ config: { inputs, groups }, onChange }: FormProps) => {
     <form>
       {groups.map((g) => (
         <Fragment key={g}>
-          <h2 style={{ textTransform: 'capitalize' }}>{g}</h2>
+          {g && <h2 style={{ textTransform: 'capitalize' }}>{g}</h2>}
 
           {Object.keys(inputs).map((key) => {
             if (inputs[key].group !== g) return undefined
