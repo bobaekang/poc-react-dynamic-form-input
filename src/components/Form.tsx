@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, Fragment } from 'react'
 import { useFormik } from 'formik'
 import InputFactory from './InputFactory'
 
 type InputConfig = {
   type: string
   label: string
+  group: string
   options?: string[]
   defaultValue?: any
   [key: string]: any
@@ -31,7 +32,7 @@ const getInitialValues = (config: {
     {}
   )
 
-const Form = ({ config: { inputs }, onChange }: FormProps) => {
+const Form = ({ config: { inputs, groups }, onChange }: FormProps) => {
   const formik = useFormik({
     initialValues: { ...getInitialValues(inputs) },
     onSubmit() {},
@@ -43,22 +44,32 @@ const Form = ({ config: { inputs }, onChange }: FormProps) => {
 
   return (
     <form>
-      {Object.keys(inputs).map((key) => {
-        const { defaultValue, showIf, group, ...keyConfig } = inputs[key]
-        const hideInput =
-          showIf && inputs[showIf].type === 'checkbox' && !formik.values[showIf]
+      {groups.map((g) => (
+        <Fragment key={g}>
+          <h2 style={{ textTransform: 'capitalize' }}>{g}</h2>
 
-        return hideInput ? undefined : (
-          <div style={{ margin: '1rem' }} key={key}>
-            <InputFactory
-              name={key}
-              config={keyConfig}
-              value={formik.values[key]}
-              onChange={formik.handleChange}
-            />
-          </div>
-        )
-      })}
+          {Object.keys(inputs).map((key) => {
+            if (inputs[key].group !== g) return undefined
+
+            const { defaultValue, showIf, group, ...keyConfig } = inputs[key]
+            const hideInput =
+              showIf &&
+              inputs[showIf].type === 'checkbox' &&
+              !formik.values[showIf]
+
+            return hideInput ? undefined : (
+              <div style={{ margin: '1rem' }} key={key}>
+                <InputFactory
+                  name={key}
+                  config={keyConfig}
+                  value={formik.values[key]}
+                  onChange={formik.handleChange}
+                />
+              </div>
+            )
+          })}
+        </Fragment>
+      ))}
     </form>
   )
 }
