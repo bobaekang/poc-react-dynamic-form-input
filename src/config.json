@@ -10,7 +10,10 @@
       "name": "hidden",
       "type": "text",
       "label": "Peekaboo!",
-      "showIf": "checkbox",
+      "showIf": {
+        "name": "checkbox",
+        "value": true
+      },
       "placeholder": "I'm hidden",
       "group": "foo"
     },

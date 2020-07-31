@@ -39,10 +39,6 @@ const Form = ({ config: { inputs, groups }, onChange }: FormProps) => {
     onChange({ ...formik.values })
   }, [formik.values, onChange])
 
-  const inputTypeMap: {
-    [key: string]: string
-  } = inputs.reduce((acc, { name, type }) => ({ ...acc, [name]: type }), {})
-
   return (
     <form>
       {groups.map((g) => (
@@ -53,12 +49,10 @@ const Form = ({ config: { inputs, groups }, onChange }: FormProps) => {
             if (input.group !== g) return undefined
 
             const { defaultValue, showIf, group, ...fieldConfig } = input
-            const hideInput =
-              showIf &&
-              inputTypeMap[showIf] === 'checkbox' &&
-              !formik.values[showIf]
+            const hideField =
+              showIf && showIf.value !== formik.values[showIf.name]
 
-            return hideInput ? undefined : (
+            return hideField ? undefined : (
               <div style={{ margin: '1rem' }} key={fieldConfig.name}>
                 <Field
                   config={fieldConfig}
