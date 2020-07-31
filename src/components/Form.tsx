@@ -5,8 +5,8 @@ import Field from './Field'
 type InputConfig = {
   name: string
   type: string
-  label: string
   group: string
+  label: string
   options?: string[]
   defaultValue?: any
   [key: string]: any
@@ -14,8 +14,8 @@ type InputConfig = {
 
 export type FormProps = {
   config: {
-    inputs: InputConfig[]
     groups: string[]
+    inputs: InputConfig[]
   }
   onChange(values: any): void
 }
