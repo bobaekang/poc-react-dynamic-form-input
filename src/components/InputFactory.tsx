@@ -6,20 +6,20 @@ import Radio from './Radio'
 
 type InputConfig = {
   type: string
+  name: string
   label: string
   options?: string[]
   [key: string]: any
 }
 
 type InputFactoryProps = {
-  name: string
   config: InputConfig
   value: any
   onChange(event: any): void
 }
 
-const InputFactory = ({ name, config, value, onChange }: InputFactoryProps) => {
-  const { type, label, options, ...props } = config
+const InputFactory = ({ config, value, onChange }: InputFactoryProps) => {
+  const { type, name, label, options, ...props } = config
 
   switch (type) {
     case 'text':

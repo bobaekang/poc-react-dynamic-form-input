@@ -52,18 +52,17 @@ const Form = ({ config: { inputs, groups }, onChange }: FormProps) => {
           {inputs.map((input) => {
             if (input.group !== g) return undefined
 
-            const { name, defaultValue, showIf, group, ...keyConfig } = input
+            const { defaultValue, showIf, group, ...keyConfig } = input
             const hideInput =
               showIf &&
               inputTypeMap[showIf] === 'checkbox' &&
               !formik.values[showIf]
 
             return hideInput ? undefined : (
-              <div style={{ margin: '1rem' }} key={name}>
+              <div style={{ margin: '1rem' }} key={keyConfig.name}>
                 <InputFactory
-                  name={name}
                   config={keyConfig}
-                  value={formik.values[name]}
+                  value={formik.values[keyConfig.name]}
                   onChange={formik.handleChange}
                 />
               </div>
