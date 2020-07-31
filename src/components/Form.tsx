@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment } from 'react'
 import { useFormik } from 'formik'
-import InputFactory from './InputFactory'
+import Field from './Field'
 
 type InputConfig = {
   name: string
@@ -52,17 +52,17 @@ const Form = ({ config: { inputs, groups }, onChange }: FormProps) => {
           {inputs.map((input) => {
             if (input.group !== g) return undefined
 
-            const { defaultValue, showIf, group, ...keyConfig } = input
+            const { defaultValue, showIf, group, ...fieldConfig } = input
             const hideInput =
               showIf &&
               inputTypeMap[showIf] === 'checkbox' &&
               !formik.values[showIf]
 
             return hideInput ? undefined : (
-              <div style={{ margin: '1rem' }} key={keyConfig.name}>
-                <InputFactory
-                  config={keyConfig}
-                  value={formik.values[keyConfig.name]}
+              <div style={{ margin: '1rem' }} key={fieldConfig.name}>
+                <Field
+                  config={fieldConfig}
+                  value={formik.values[fieldConfig.name]}
                   onChange={formik.handleChange}
                 />
               </div>

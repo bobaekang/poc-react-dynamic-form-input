@@ -4,7 +4,7 @@ import Select from './Select'
 import TextField from './TextField'
 import Radio from './Radio'
 
-type InputConfig = {
+type FieldConfig = {
   type: string
   name: string
   label: string
@@ -12,13 +12,13 @@ type InputConfig = {
   [key: string]: any
 }
 
-type InputFactoryProps = {
-  config: InputConfig
+type FieldProps = {
+  config: FieldConfig
   value: any
   onChange(event: any): void
 }
 
-const InputFactory = ({ config, value, onChange }: InputFactoryProps) => {
+const Field = ({ config, value, onChange }: FieldProps) => {
   const { type, name, label, options, ...props } = config
 
   switch (type) {
@@ -71,4 +71,4 @@ const InputFactory = ({ config, value, onChange }: InputFactoryProps) => {
   }
 }
 
-export default InputFactory
+export default Field
