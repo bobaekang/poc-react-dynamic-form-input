@@ -15,6 +15,7 @@ type FieldConfig = {
   label: string
   options?: string[]
   defaultValue?: any
+  showIf?: { id: number; value: any }
   [key: string]: any
 }
 
