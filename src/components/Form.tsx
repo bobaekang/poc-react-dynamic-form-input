@@ -7,7 +7,7 @@ type GroupConfig = {
   name: string
 }
 
-type InputConfig = {
+type FieldConfig = {
   groupId: number
   name: string
   type: string
@@ -20,12 +20,12 @@ type InputConfig = {
 export type FormProps = {
   config: {
     groups: GroupConfig[]
-    inputs: InputConfig[]
+    fields: FieldConfig[]
   }
   onChange(values: any): void
 }
 
-const getInitialValues = (inputs: InputConfig[]): { [key: string]: any } =>
+const getInitialValues = (inputs: FieldConfig[]): { [key: string]: any } =>
   inputs.reduce(
     (acc, { name, type, defaultValue }) => ({
       ...acc,
@@ -34,9 +34,9 @@ const getInitialValues = (inputs: InputConfig[]): { [key: string]: any } =>
     {}
   )
 
-const Form = ({ config: { inputs, groups }, onChange }: FormProps) => {
+const Form = ({ config: { groups, fields }, onChange }: FormProps) => {
   const formik = useFormik({
-    initialValues: { ...getInitialValues(inputs) },
+    initialValues: { ...getInitialValues(fields) },
     onSubmit() {},
   })
 
@@ -52,10 +52,10 @@ const Form = ({ config: { inputs, groups }, onChange }: FormProps) => {
             <h2 style={{ textTransform: 'capitalize' }}>{group.name}</h2>
           )}
 
-          {inputs.map((input) => {
-            if (input.groupId !== group.id) return undefined
+          {fields.map((field) => {
+            if (field.groupId !== group.id) return undefined
 
-            const { defaultValue, showIf, groupId, ...fieldConfig } = input
+            const { defaultValue, showIf, groupId, ...fieldConfig } = field
             const hideField =
               showIf && showIf.value !== formik.values[showIf.name]
 
