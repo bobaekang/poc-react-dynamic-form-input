@@ -1,13 +1,27 @@
 {
-  "groups": ["foo", "bar", "baz"],
-  "inputs": [
+  "groups": [
     {
-      "name": "checkbox",
-      "type": "checkbox",
-      "label": "Simple checkbox",
-      "group": "foo"
+      "id": 0,
+      "name": "foo"
     },
     {
+      "id": 1,
+      "name": "bar"
+    },
+    {
+      "id": 2,
+      "name": "baz"
+    }
+  ],
+  "inputs": [
+    {
+      "groupId": 0,
+      "name": "checkbox",
+      "type": "checkbox",
+      "label": "Simple checkbox"
+    },
+    {
+      "groupId": 0,
       "name": "hidden",
       "type": "text",
       "label": "Peekaboo!",
@@ -15,40 +29,39 @@
         "name": "checkbox",
         "value": true
       },
-      "placeholder": "I'm hidden",
-      "group": "foo"
+      "placeholder": "I'm hidden"
     },
     {
+      "groupId": 1,
       "name": "number",
       "type": "number",
       "label": "Simple number",
       "defaultValue": 5,
       "min": 0,
-      "max": 10,
-      "group": "bar"
+      "max": 10
     },
     {
+      "groupId": 2,
       "name": "text",
       "type": "text",
       "label": "Simple text",
-      "pattern": "^[a-zA-Z]*$",
-      "group": "baz"
+      "pattern": "^[a-zA-Z]*$"
     },
     {
+      "groupId": 1,
       "name": "select",
       "type": "select",
       "label": "Simple select",
       "options": ["foo", "bar"],
-      "placeholder": "Select one",
-      "group": "bar"
+      "placeholder": "Select one"
     },
     {
+      "groupId": 1,
       "name": "radio",
       "type": "radio",
       "label": "Simple radio",
       "options": ["foo", "bar"],
-      "defaultValue": "bar",
-      "group": "bar"
+      "defaultValue": "bar"
     }
   ]
 }
