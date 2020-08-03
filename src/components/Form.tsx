@@ -52,10 +52,9 @@ const Form = ({ config: { groups, fields }, onChange }: FormProps) => {
             <h2 style={{ textTransform: 'capitalize' }}>{group.name}</h2>
           )}
 
-          {fields.map((field) => {
-            if (field.groupId !== group.id) return undefined
+          {fields.map(({ defaultValue, showIf, groupId, ...fieldConfig }) => {
+            if (groupId !== group.id) return undefined
 
-            const { defaultValue, showIf, groupId, ...fieldConfig } = field
             const hideField =
               showIf && showIf.value !== formik.values[showIf.name]
 
