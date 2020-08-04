@@ -36,18 +36,6 @@ const getInitialValues = (inputs: FieldConfig[]): { [key: string]: any } =>
     {}
   )
 
-const getShowIfName = (fields: FieldConfig[], showIfId: number) => {
-  let showIfName
-  for (const { id, name } of fields) {
-    if (showIfId === id) {
-      showIfName = name
-      break
-    }
-  }
-
-  return showIfName
-}
-
 const Form = ({ config: { groups, fields }, onChange }: FormProps) => {
   const formik = useFormik({
     initialValues: { ...getInitialValues(fields) },
@@ -70,11 +58,13 @@ const Form = ({ config: { groups, fields }, onChange }: FormProps) => {
             ({ id, groupId, defaultValue, showIf, ...fieldConfig }) => {
               if (groupId !== group.id) return undefined
 
-              const showIfName = showIf && getShowIfName(fields, showIf.id)
-              const hideField =
-                showIf &&
-                showIfName &&
-                showIf.value !== formik.values[showIfName]
+              let hideField = false
+              if (showIf !== undefined)
+                for (const field of fields)
+                  if (showIf.id === field.id) {
+                    hideField = showIf.value !== formik.values[field.name]
+                    break
+                  }
 
               return hideField ? undefined : (
                 <div style={{ margin: '1rem' }} key={id}>
