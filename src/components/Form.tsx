@@ -58,12 +58,16 @@ const Form = ({ config: { groups, fields }, onChange }: FormProps) => {
 
               let hideField = false
               if (showIf !== undefined)
-                for (const field of fields)
-                  if (showIf.id === field.id) {
-                    hideField = !checkShowIf(showIf, formik.values[field.name])
-                    break
-                  }
+                for (const showIfCrit of showIf)
+                  for (const field of fields) {
+                    if (showIfCrit.id === field.id)
+                      hideField = !checkShowIf(
+                        showIfCrit,
+                        formik.values[field.name]
+                      )
 
+                    if (!hideField) break
+                  }
               return hideField ? undefined : (
                 <div style={{ margin: '1rem' }} key={id}>
                   <Field

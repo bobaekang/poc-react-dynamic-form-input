@@ -17,7 +17,7 @@ export type FieldConfig = {
   label: string
   options?: string[]
   defaultValue?: any
-  showIf?: showIfCriterion
+  showIf?: showIfCriterion[]
   [key: string]: any
 }
 
