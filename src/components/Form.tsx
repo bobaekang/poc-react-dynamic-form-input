@@ -34,6 +34,22 @@ const checkShowIf = (crit: showIfCriterion, value: any) => {
   }
 }
 
+const handleShowif = (
+  showIf: showIfCriterion[],
+  fields: FieldConfig[],
+  values: { [x: string]: any }
+) => {
+  let showField = true
+  for (const showIfCrit of showIf)
+    for (const field of fields) {
+      if (showIfCrit.id === field.id)
+        showField = checkShowIf(showIfCrit, values[field.name])
+
+      if (showField) break
+    }
+  return showField
+}
+
 const Form = ({ config: { groups, fields }, onChange }: FormProps) => {
   const formik = useFormik({
     initialValues: { ...getInitialValues(fields) },
@@ -58,16 +74,7 @@ const Form = ({ config: { groups, fields }, onChange }: FormProps) => {
 
               let showField = true
               if (showIf !== undefined)
-                for (const showIfCrit of showIf)
-                  for (const field of fields) {
-                    if (showIfCrit.id === field.id)
-                      showField = checkShowIf(
-                        showIfCrit,
-                        formik.values[field.name]
-                      )
-
-                    if (showField) break
-                  }
+                showField = handleShowif(showIf, fields, formik.values)
 
               return (
                 showField && (
