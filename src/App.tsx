@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Form from './components/Form'
 import config from './config.json'
-import { GroupConfig, FieldConfig } from './model'
+import { Config } from './model'
 
 function App() {
   const [values, setValues] = useState()
@@ -21,15 +21,7 @@ function App() {
 
       <div style={{ margin: '0 1rem' }}>
         <h1>Generated form</h1>
-        <Form
-          config={
-            config as {
-              groups: GroupConfig[]
-              fields: FieldConfig[]
-            }
-          }
-          onChange={setValues}
-        />
+        <Form config={config as Config} onChange={setValues} />
       </div>
 
       <div style={{ margin: '0 1rem' }}>

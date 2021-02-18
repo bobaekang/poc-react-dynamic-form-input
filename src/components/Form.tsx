@@ -1,13 +1,10 @@
 import React, { useEffect, Fragment } from 'react'
 import { useFormik } from 'formik'
 import Field from './Field'
-import { GroupConfig, FieldConfig, showIfCriterion } from '../model'
+import { Config, FieldConfig, showIfCriterion } from '../model'
 
 export type FormProps = {
-  config: {
-    groups: GroupConfig[]
-    fields: FieldConfig[]
-  }
+  config: Config
   onChange(values: any): void
 }
 

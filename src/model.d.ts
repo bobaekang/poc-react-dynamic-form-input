@@ -20,3 +20,8 @@ export type FieldConfig = {
   showIf?: showIfCriterion
   [key: string]: any
 }
+
+export type Config = {
+  groups: GroupConfig[]
+  fields: FieldConfig[]
+}
