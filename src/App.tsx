@@ -1,29 +1,7 @@
 import React, { useState } from 'react'
 import Form from './components/Form'
 import config from './config.json'
-
-type GroupConfig = {
-  id: number
-  name: string
-}
-
-type showIfCriterion = {
-  id: number
-  operator: 'eq' | 'gt' | 'gte' | 'lt' | 'lte' | 'ne'
-  value: any
-}
-
-type FieldConfig = {
-  id: number
-  groupId: number
-  name: string
-  type: string
-  label: string
-  options?: string[]
-  defaultValue?: any
-  showIf?: showIfCriterion
-  [key: string]: any
-}
+import { GroupConfig, FieldConfig } from './model'
 
 function App() {
   const [values, setValues] = useState()

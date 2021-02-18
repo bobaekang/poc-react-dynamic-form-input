@@ -1,29 +1,7 @@
 import React, { useEffect, Fragment } from 'react'
 import { useFormik } from 'formik'
 import Field from './Field'
-
-type GroupConfig = {
-  id: number
-  name: string
-}
-
-type showIfCriterion = {
-  id: number
-  operator: 'eq' | 'gt' | 'gte' | 'lt' | 'lte' | 'ne'
-  value: any
-}
-
-type FieldConfig = {
-  id: number
-  groupId: number
-  name: string
-  type: string
-  label: string
-  options?: string[]
-  defaultValue?: any
-  showIf?: showIfCriterion
-  [key: string]: any
-}
+import { GroupConfig, FieldConfig, showIfCriterion } from '../model'
 
 export type FormProps = {
   config: {
