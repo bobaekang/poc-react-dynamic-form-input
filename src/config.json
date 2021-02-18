@@ -29,6 +29,7 @@
       "label": "Peekaboo!",
       "showIf": {
         "id": 0,
+        "operator": "eq",
         "value": true
       },
       "placeholder": "I'm hidden"

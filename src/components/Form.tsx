@@ -7,6 +7,12 @@ type GroupConfig = {
   name: string
 }
 
+type showIfCriterion = {
+  id: number
+  operator: 'eq' | 'gt' | 'gte' | 'lt' | 'lte' | 'ne'
+  value: any
+}
+
 type FieldConfig = {
   id: number
   groupId: number
@@ -15,7 +21,7 @@ type FieldConfig = {
   label: string
   options?: string[]
   defaultValue?: any
-  showIf?: { id: number; value: any }
+  showIf?: showIfCriterion
   [key: string]: any
 }
 
@@ -35,6 +41,23 @@ const getInitialValues = (inputs: FieldConfig[]): { [key: string]: any } =>
     }),
     {}
   )
+
+const checkShowIf = (crit: showIfCriterion, value: any) => {
+  switch (crit.operator) {
+    case 'eq':
+      return crit.value === value
+    case 'gt':
+      return crit.value < value
+    case 'gte':
+      return crit.value <= value
+    case 'lt':
+      return crit.value > value
+    case 'lte':
+      return crit.value >= value
+    case 'ne':
+      return crit.value !== value
+  }
+}
 
 const Form = ({ config: { groups, fields }, onChange }: FormProps) => {
   const formik = useFormik({
@@ -62,7 +85,7 @@ const Form = ({ config: { groups, fields }, onChange }: FormProps) => {
               if (showIf !== undefined)
                 for (const field of fields)
                   if (showIf.id === field.id) {
-                    hideField = showIf.value !== formik.values[field.name]
+                    hideField = !checkShowIf(showIf, formik.values[field.name])
                     break
                   }
 
