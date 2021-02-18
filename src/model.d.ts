@@ -9,6 +9,10 @@ export type showIfCriterion = {
   value: any
 }
 
+export type showIfCondition = {
+  criteria: showIfCriterion[]
+}
+
 export type FieldConfig = {
   id: number
   groupId: number
@@ -17,7 +21,7 @@ export type FieldConfig = {
   label: string
   options?: string[]
   defaultValue?: any
-  showIf?: showIfCriterion[]
+  showIf?: showIfCondition
   [key: string]: any
 }
 

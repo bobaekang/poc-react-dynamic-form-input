@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from 'react'
 import { useFormik } from 'formik'
 import Field from './Field'
-import { Config, FieldConfig, showIfCriterion } from '../model'
+import { Config, FieldConfig, showIfCondition, showIfCriterion } from '../model'
 
 export type FormProps = {
   config: Config
@@ -35,13 +35,13 @@ const checkShowIf = (crit: showIfCriterion, value: any) => {
 }
 
 const handleShowif = (
-  showIf: showIfCriterion[],
+  showIf: showIfCondition,
   fields: FieldConfig[],
   values: { [x: string]: any }
 ) => {
   let showField = true
-  for (const showIfCrit of showIf)
-    for (const field of fields) {
+  for (const field of fields)
+    for (const showIfCrit of showIf.criteria) {
       if (showIfCrit.id === field.id)
         showField = checkShowIf(showIfCrit, values[field.name])
 

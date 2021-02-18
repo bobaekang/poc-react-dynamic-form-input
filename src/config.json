@@ -27,18 +27,20 @@
       "name": "hidden",
       "type": "text",
       "label": "Peekaboo!",
-      "showIf": [
-        {
-          "id": 0,
-          "operator": "eq",
-          "value": true
-        },
-        {
-          "id": 2,
-          "operator": "gt",
-          "value": 5
-        }
-      ],
+      "showIf": {
+        "criteria": [
+          {
+            "id": 0,
+            "operator": "eq",
+            "value": true
+          },
+          {
+            "id": 2,
+            "operator": "gt",
+            "value": 5
+          }
+        ]
+      },
       "placeholder": "I'm hidden"
     },
     {
