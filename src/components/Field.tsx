@@ -9,7 +9,8 @@ type FieldConfig = {
   type: string
   name: string
   label: string
-  options?: string[]
+  radioOptions?: string[]
+  selectOptions?: string[]
   [key: string]: any
 }
 
@@ -20,7 +21,7 @@ type FieldProps = {
 }
 
 const Field = ({ config, value, onChange }: FieldProps) => {
-  const { type, name, label, options, ...props } = config
+  const { type, name, label, radioOptions, selectOptions, ...props } = config
 
   switch (type) {
     case 'text':
@@ -50,7 +51,7 @@ const Field = ({ config, value, onChange }: FieldProps) => {
         <Select
           name={name}
           label={label}
-          options={options ? options : []}
+          options={selectOptions ? selectOptions : []}
           value={value}
           onChange={onChange}
           {...props}
@@ -61,7 +62,7 @@ const Field = ({ config, value, onChange }: FieldProps) => {
         <Radio
           name={name}
           label={label}
-          options={options ? options : []}
+          options={radioOptions ? radioOptions : []}
           value={value}
           onChange={onChange}
           {...props}

@@ -20,7 +20,8 @@ export type FieldConfig = {
   name: string
   type: string
   label: string
-  options?: string[]
+  radioOptions?: string[]
+  selectOptions?: string[]
   defaultValue?: any
   showIf?: showIfCondition
   [key: string]: any

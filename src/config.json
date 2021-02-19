@@ -91,7 +91,7 @@
       "name": "select",
       "type": "select",
       "label": "Simple select",
-      "options": ["foo", "bar"],
+      "selectOptions": ["foo", "bar"],
       "placeholder": "Select one"
     },
     {
@@ -100,7 +100,7 @@
       "name": "radio",
       "type": "radio",
       "label": "Simple radio",
-      "options": ["foo", "bar"],
+      "radioOptions": ["foo", "bar"],
       "defaultValue": "bar"
     },
     {
