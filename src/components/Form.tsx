@@ -35,23 +35,19 @@ const checkShowIf = (crit: showIfCriterion, value: any) => {
 }
 
 const handleShowif = (
-  showIf: showIfCondition,
+  { criteria, operator }: showIfCondition,
   fields: FieldConfig[],
   values: { [x: string]: any }
 ) => {
-  let showField = true
-  for (const field of fields)
-    for (const showIfCrit of showIf.criteria) {
-      if (showIfCrit.id === field.id)
-        showField = checkShowIf(showIfCrit, values[field.name])
+  let show = true
+  for (const crit of criteria)
+    for (const field of fields) {
+      if (crit.id === field.id) show = checkShowIf(crit, values[field.name])
 
-      if (
-        (showIf.operator === 'AND' && !showField) ||
-        (showIf.operator === 'OR' && showField)
-      )
-        break
+      if ((operator === 'AND' && !show) || (operator === 'OR' && show)) break
     }
-  return showField
+
+  return show
 }
 
 const Form = ({ config: { groups, fields }, onChange }: FormProps) => {
