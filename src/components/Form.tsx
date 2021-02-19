@@ -45,7 +45,11 @@ const handleShowif = (
       if (showIfCrit.id === field.id)
         showField = checkShowIf(showIfCrit, values[field.name])
 
-      if (showField) break
+      if (
+        (showIf.operator === 'AND' && !showField) ||
+        (showIf.operator === 'OR' && showField)
+      )
+        break
     }
   return showField
 }

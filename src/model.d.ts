@@ -10,6 +10,7 @@ export type showIfCriterion = {
 }
 
 export type showIfCondition = {
+  operator: 'AND' | 'OR'
   criteria: showIfCriterion[]
 }
 

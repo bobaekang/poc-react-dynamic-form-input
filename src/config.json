@@ -28,6 +28,7 @@
       "type": "text",
       "label": "Peekaboo!",
       "showIf": {
+        "operator": "OR",
         "criteria": [
           {
             "id": 0,
