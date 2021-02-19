@@ -3,6 +3,7 @@ import Checkbox from './Checkbox'
 import Select from './Select'
 import TextField from './TextField'
 import Radio from './Radio'
+import AgeField from './AgeField'
 
 type FieldConfig = {
   type: string
@@ -61,6 +62,16 @@ const Field = ({ config, value, onChange }: FieldProps) => {
           name={name}
           label={label}
           options={options ? options : []}
+          value={value}
+          onChange={onChange}
+          {...props}
+        />
+      )
+    case 'age':
+      return (
+        <AgeField
+          name={name}
+          label={label}
           value={value}
           onChange={onChange}
           {...props}

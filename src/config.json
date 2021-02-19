@@ -102,6 +102,13 @@
       "label": "Simple radio",
       "options": ["foo", "bar"],
       "defaultValue": "bar"
+    },
+    {
+      "id": 7,
+      "groupId": 2,
+      "name": "age",
+      "type": "age",
+      "label": "Simple age"
     }
   ]
 }
