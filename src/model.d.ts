@@ -14,6 +14,12 @@ export type showIfCondition = {
   criteria: showIfCriterion[]
 }
 
+export type SelectOption = {
+  value: string
+  label?: string
+  description?: string
+}
+
 export type FieldConfig = {
   id: number
   groupId: number
@@ -21,7 +27,7 @@ export type FieldConfig = {
   type: string
   label: string
   radioOptions?: string[]
-  selectOptions?: string[]
+  selectOptions?: SelectOption[]
   defaultValue?: any
   showIf?: showIfCondition
   [key: string]: any

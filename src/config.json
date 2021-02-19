@@ -91,7 +91,7 @@
       "name": "select",
       "type": "select",
       "label": "Simple select",
-      "selectOptions": ["foo", "bar"],
+      "selectOptions": [{ "value": "foo" }, { "value": "bar" }],
       "placeholder": "Select one"
     },
     {

@@ -1,10 +1,11 @@
 import React from 'react'
+import { SelectOption } from '../model'
 import Label from './Label'
 
 type SelectProps = {
   label?: string
   name?: string
-  options: string[]
+  options: SelectOption[]
   placeholder?: string
   disabled?: boolean
   required?: boolean
@@ -35,8 +36,8 @@ const Select = ({
         </option>
       )}
       {options.map((option) => (
-        <option key={option} value={option}>
-          {option}
+        <option key={option.value} value={option.value}>
+          {option.label || option.value}
         </option>
       ))}
     </select>

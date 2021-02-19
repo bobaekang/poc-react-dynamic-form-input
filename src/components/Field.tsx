@@ -4,13 +4,14 @@ import Select from './Select'
 import TextField from './TextField'
 import Radio from './Radio'
 import AgeField from './AgeField'
+import { SelectOption } from '../model'
 
 type FieldConfig = {
   type: string
   name: string
   label: string
   radioOptions?: string[]
-  selectOptions?: string[]
+  selectOptions?: SelectOption[]
   [key: string]: any
 }
 
