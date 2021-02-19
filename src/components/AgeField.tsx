@@ -65,7 +65,6 @@ const AgeField = ({
 
   useEffect(() => {
     const newValue = parseAge(age)
-    console.log(newValue)
     if (onChange && value !== newValue)
       onChange({
         target: {
