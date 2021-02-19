@@ -17,7 +17,7 @@ const getInitialValues = (inputs: FieldConfig[]): { [key: string]: any } =>
     {}
   )
 
-const checkShowIf = (crit: showIfCriterion, value: any) => {
+const isShow = (crit: showIfCriterion, value: any) => {
   switch (crit.operator) {
     case 'eq':
       return crit.value === value
@@ -42,7 +42,7 @@ const handleShowif = (
   let show = true
   for (const crit of criteria)
     for (const field of fields) {
-      if (crit.id === field.id) show = checkShowIf(crit, values[field.name])
+      if (crit.id === field.id) show = isShow(crit, values[field.name])
 
       if ((operator === 'AND' && !show) || (operator === 'OR' && show)) break
     }
