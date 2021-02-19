@@ -3,6 +3,16 @@ import Form from './components/Form'
 import config from './config.json'
 import { Config } from './model'
 
+function pruneValues(values?: object) {
+  const pruned: { [key: string]: any } = {}
+
+  if (values !== undefined)
+    for (const [key, value] of Object.entries(values))
+      if (value !== '') pruned[key] = value
+
+  return pruned
+}
+
 function App() {
   const [values, setValues] = useState()
 
@@ -26,7 +36,7 @@ function App() {
 
       <div style={{ margin: '0 1rem' }}>
         <h1>Current values</h1>
-        <pre>{JSON.stringify(values, null, 2)}</pre>
+        <pre>{JSON.stringify(pruneValues(values), null, 2)}</pre>
       </div>
     </div>
   )
