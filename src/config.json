@@ -36,7 +36,7 @@
             "value": true
           },
           {
-            "id": 2,
+            "id": 3,
             "operator": "gt",
             "value": 5
           }
@@ -46,6 +46,29 @@
     },
     {
       "id": 2,
+      "groupId": 0,
+      "name": "hidden2",
+      "type": "text",
+      "label": "Peekaboo, again!",
+      "showIf": {
+        "operator": "AND",
+        "criteria": [
+          {
+            "id": 0,
+            "operator": "eq",
+            "value": true
+          },
+          {
+            "id": 3,
+            "operator": "gt",
+            "value": 5
+          }
+        ]
+      },
+      "placeholder": "I'm also hidden"
+    },
+    {
+      "id": 3,
       "groupId": 1,
       "name": "number",
       "type": "number",
@@ -55,7 +78,7 @@
       "max": 10
     },
     {
-      "id": 3,
+      "id": 4,
       "groupId": 2,
       "name": "text",
       "type": "text",
@@ -63,7 +86,7 @@
       "pattern": "^[a-zA-Z]*$"
     },
     {
-      "id": 4,
+      "id": 5,
       "groupId": 1,
       "name": "select",
       "type": "select",
@@ -72,7 +95,7 @@
       "placeholder": "Select one"
     },
     {
-      "id": 5,
+      "id": 6,
       "groupId": 1,
       "name": "radio",
       "type": "radio",
