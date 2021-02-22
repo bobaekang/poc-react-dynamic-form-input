@@ -40,12 +40,15 @@ const handleShowif = (
   values: { [x: string]: any }
 ) => {
   let show = true
-  for (const crit of criteria)
-    for (const field of fields) {
-      if (crit.id === field.id) show = isShow(crit, values[field.name])
 
-      if ((operator === 'AND' && !show) || (operator === 'OR' && show)) break
-    }
+  showIfCritCheck: for (const crit of criteria)
+    for (const field of fields)
+      if (crit.id === field.id) {
+        show = isShow(crit, values[field.name])
+
+        if ((operator === 'AND' && !show) || (operator === 'OR' && show))
+          break showIfCritCheck
+      }
 
   return show
 }
