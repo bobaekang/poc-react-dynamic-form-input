@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { SelectOption } from '../model'
+import { FieldOption } from '../model'
 import Label from './Label'
 
 type SelectProps = {
   label?: string
   name?: string
-  options: SelectOption[]
+  options: FieldOption[]
   placeholder?: string
   disabled?: boolean
   required?: boolean
@@ -13,7 +13,7 @@ type SelectProps = {
   onChange?: React.ChangeEventHandler<HTMLSelectElement>
 }
 
-function getDescriptionMap(options: SelectOption[]) {
+function getDescriptionMap(options: FieldOption[]) {
   const descriptionMap: { [key: string]: string } = {}
   for (const { value, description } of options)
     descriptionMap[value] = description || ''

@@ -1,10 +1,11 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import Label from './Label'
+import { FieldOption } from '../model'
 
 type RadioProps = {
   label?: string
   name?: string
-  options?: string[]
+  options?: FieldOption[]
   disabled?: boolean
   required?: boolean
   value?: string
@@ -36,18 +37,18 @@ const Radio = ({
     <>
       {label && <Label text={label} htmlFor={name} />}
       {options &&
-        options.map((option) => (
-          <Fragment key={option}>
+        options.map(({ label, value }) => (
+          <Fragment key={value}>
             <input
               {...attrs}
-              id={option}
+              id={value}
               name={name}
               type="radio"
-              value={option}
-              checked={option === radioValue}
-              onChange={disabled ? undefined : () => setRadioValue(option)}
+              value={value}
+              checked={value === radioValue}
+              onChange={disabled ? undefined : () => setRadioValue(value)}
             />
-            <Label text={option} htmlFor={option} />
+            <Label text={label || value} htmlFor={value} />
           </Fragment>
         ))}
     </>
