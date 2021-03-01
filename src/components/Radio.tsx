@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react'
+import React, { useState, Fragment } from 'react'
 import Label from './Label'
 import { FieldOption } from '../model'
 
@@ -22,16 +22,11 @@ const Radio = ({
   ...attrs
 }: RadioProps) => {
   const [radioValue, setRadioValue] = useState(value || undefined)
-  useEffect(() => {
-    if (onChange && name) {
-      onChange({
-        target: {
-          name,
-          value: radioValue,
-        },
-      })
-    }
-  }, [name, onChange, radioValue])
+
+  function handleChange(value: any) {
+    setRadioValue(value)
+    if (onChange && name) onChange({ target: { name, value } })
+  }
 
   return (
     <>
@@ -46,7 +41,7 @@ const Radio = ({
               type="radio"
               value={value}
               checked={value === radioValue}
-              onChange={disabled ? undefined : () => setRadioValue(value)}
+              onChange={disabled ? undefined : () => handleChange(value)}
             />
             <Label text={label} htmlFor={value} />
           </Fragment>
