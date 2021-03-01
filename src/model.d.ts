@@ -15,8 +15,8 @@ export type showIfCondition = {
 }
 
 export type FieldOption = {
-  value: string
-  label?: string
+  value: any
+  label: string
   description?: string
 }
 

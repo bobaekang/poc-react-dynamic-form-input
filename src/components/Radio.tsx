@@ -48,7 +48,7 @@ const Radio = ({
               checked={value === radioValue}
               onChange={disabled ? undefined : () => setRadioValue(value)}
             />
-            <Label text={label || value} htmlFor={value} />
+            <Label text={label} htmlFor={value} />
           </Fragment>
         ))}
     </>
