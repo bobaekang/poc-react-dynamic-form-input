@@ -92,8 +92,8 @@
       "type": "select",
       "label": "Simple select",
       "options": [
-        { "value": "foo", "label": "Foo", "description": "This is Foo!" },
-        { "value": "bar", "label": "Bar" }
+        { "value": 0, "label": "Foo", "description": "This is Foo!" },
+        { "value": 1, "label": "Bar" }
       ],
       "placeholder": "Select one"
     },
@@ -103,8 +103,11 @@
       "name": "radio",
       "type": "radio",
       "label": "Simple radio",
-      "options": [{ "value": "foo" }, { "value": "bar", "label": "Bar" }],
-      "defaultValue": "bar"
+      "options": [
+        { "value": 0, "label": "Foo" },
+        { "value": 1, "label": "Bar" }
+      ],
+      "defaultValue": 1
     },
     {
       "id": 7,
