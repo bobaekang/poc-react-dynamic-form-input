@@ -1,129 +1,120 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Label from './Label'
+
+type AgeInputProps = AgeFieldProps & {
+  which: 'year' | 'month'
+}
 
 type AgeFieldProps = {
   label?: string
   name?: string
   readOnly?: boolean
   required?: boolean
-  value?: number
+  value?: number | ''
   onChange?: React.ChangeEventHandler<HTMLInputElement>
 }
 
-const DAY_IN_YEAR = 365
-const DAY_IN_MONTH = 30
+const MONTH_IN_YEAR = 12
 
-function formatAge(value?: number) {
+function formatAge(value?: number | '') {
   let year
   let month
-  let day
 
-  if (value !== undefined) {
-    day = value
+  if (value !== undefined && value !== '') {
+    month = value
 
-    if (day >= DAY_IN_YEAR) {
-      year = Math.floor(day / DAY_IN_YEAR)
-      day -= year * DAY_IN_YEAR
-    }
-
-    if (day >= DAY_IN_MONTH) {
-      month = Math.floor(day / DAY_IN_MONTH)
-      day -= month * DAY_IN_MONTH
+    if (month >= MONTH_IN_YEAR) {
+      year = Math.floor(month / MONTH_IN_YEAR)
+      month -= year * MONTH_IN_YEAR
     }
   }
 
-  return { year, month, day }
+  return { year, month }
 }
 
-function parseAge(age: { year?: number; month?: number; day?: number }) {
-  const { year, month, day } = age
+function parseAge(age: { year?: number; month?: number }) {
+  const { year, month } = age
 
-  return !year && !month && !day
+  return year === undefined && month === undefined
     ? undefined
-    : (year || 0) * DAY_IN_YEAR + (month || 0) * DAY_IN_MONTH + (day || 0)
+    : (year || 0) * MONTH_IN_YEAR + (month || 0)
 }
 
-const AgeField = ({
+function AgeInput({ name, value, which, onChange, ...attrs }: AgeInputProps) {
+  const isPlural = value !== undefined && value > 1
+  return (
+    <>
+      <input
+        {...attrs}
+        value={value}
+        id={which}
+        name={name}
+        type="number"
+        min={0}
+        onChange={onChange}
+        style={{ maxWidth: '5rem' }}
+      />
+      {isPlural ? ` ${which}s ` : ` ${which} `}
+    </>
+  )
+}
+
+function AgeField({
   label = '',
   name = '',
   value,
   onChange,
   ...attrs
-}: AgeFieldProps) => {
+}: AgeFieldProps) {
   const [age, setAge] = useState(formatAge(value))
 
-  useEffect(() => {
-    const newAge = formatAge(value)
-    if (
-      age.year !== newAge.year ||
-      age.month !== newAge.month ||
-      age.day !== newAge.day
-    )
-      setAge(newAge)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value])
+  function handleChange(
+    e: React.ChangeEvent<HTMLInputElement>,
+    which: 'year' | 'month'
+  ) {
+    const newWhich =
+      e.target.value === '' ? undefined : parseInt(e.target.value)
+    const newAge = { ...age, [which]: newWhich }
+    setAge(newAge)
 
-  useEffect(() => {
-    const newValue = parseAge(age)
-    if (onChange && value !== newValue)
+    if (onChange) {
+      const newParsed = parseAge(newAge)
+      const newValue =
+        newParsed !== undefined ? newParsed.toString() : undefined
       onChange({
-        target: {
-          name,
-          value: newValue !== undefined ? newValue.toString() : null,
-          type: 'number',
-        },
+        target: { name, value: newValue, type: 'number' },
       } as React.ChangeEvent<HTMLInputElement>)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [age])
+    }
+  }
 
   return (
     <>
-      {label && <Label text={label} htmlFor={name} />}
-      <input
+      {label && <Label htmlFor={name} text={label} />}
+      <AgeInput
         {...attrs}
         value={age.year}
-        id="year"
-        name={name}
-        type="number"
-        min={0}
-        size={5}
-        onChange={(e) => {
-          const newYear =
-            e.target.value === '' ? undefined : parseInt(e.target.value)
-          setAge((prevAge) => ({ ...prevAge, year: newYear }))
-        }}
+        which="year"
+        onChange={(e) => handleChange(e, 'year')}
       />
-      {' year(s) '}
-      <input
+      <AgeInput
         {...attrs}
         value={age.month}
-        id="month"
-        name={name}
-        type="number"
-        min={0}
-        size={5}
-        onChange={(e) => {
-          const newMonth =
-            e.target.value === '' ? undefined : parseInt(e.target.value)
-          setAge((prevAge) => ({ ...prevAge, month: newMonth }))
-        }}
+        which="month"
+        onChange={(e) => handleChange(e, 'month')}
       />
-      {' month(s) '}
-      <input
-        {...attrs}
-        value={age.day}
-        id="day"
-        name={name}
-        type="number"
-        min={0}
-        size={5}
-        onChange={(e) => {
-          const newDay =
-            e.target.value === '' ? undefined : parseInt(e.target.value)
-          setAge((prevAge) => ({ ...prevAge, day: newDay }))
+      <div
+        style={{
+          color: '#999',
+          fontSize: '.8rem',
+          fontStyle: 'italic',
+          textAlign: 'right',
+          marginTop: '.5rem',
         }}
-      />
-      {' day(s)'}
+      >
+        {value !== undefined && value !== ''
+          ? `Total ${value} ${value < 2 ? 'month' : 'months'}`
+          : `Total ?? month`}
+      </div>
     </>
   )
 }
